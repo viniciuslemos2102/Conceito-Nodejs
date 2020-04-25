@@ -10,8 +10,13 @@ const repositories = [];
 
 
 app.get("/repositories", (request, response) => {
+  const { title, url, techs } = request.query;
 
-  return response.json(repositories);
+  const results = title
+    ? repositories.filter(repository => repository.title.includes(title))
+    : repositories;
+
+  return response.json(results);
 
 });
 
